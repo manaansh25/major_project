@@ -10,6 +10,8 @@ from torch.utils.data import Dataset
 NUM_FRAMES = 16
 FRAME_SIZE = 112
 
+MEAN = [0.43216, 0.394666, 0.37645]
+STD = [0.22803, 0.22145, 0.216989]
 VIDEO_EXTENSIONS = {".mp4", ".avi"}
 
 CLASS_TO_LABEL = {
@@ -131,7 +133,10 @@ class ViolenceDataset(Dataset):
         frames_tensor = torch.from_numpy(frames_array)
 
         frames_tensor = frames_tensor.permute(3, 0, 1, 2)
-
+        mean = torch.tensor(MEAN).view(3, 1, 1, 1)
+        std = torch.tensor(STD).view(3, 1, 1,1)
+        frames_tensor = (frames_tensor - mean) / std
+        
         return frames_tensor
     
     
