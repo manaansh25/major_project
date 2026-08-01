@@ -20,7 +20,7 @@ FRAME_SIZE = 112
 # Training
 # -----------------------------
 BATCH_SIZE = 8
-EPOCHS = 2
+EPOCHS = 5
 
 LEARNING_RATE = 1e-4
 WEIGHT_DECAY = 1e-4
