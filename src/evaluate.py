@@ -9,15 +9,17 @@ from sklearn.metrics import (
 
 from model import get_model
 from dataloader import test_loader
-from config import DEVICE, BEST_MODEL_PATH
+from config import DEVICE, BEST_MODEL_PATH, ROBUST_BEST_MODEL_PATH
 
 
 model = get_model().to(DEVICE)
 
+# model.load_state_dict(
+#     torch.load(BEST_MODEL_PATH, map_location=DEVICE)
+# )
 model.load_state_dict(
-    torch.load(BEST_MODEL_PATH, map_location=DEVICE)
+    torch.load(ROBUST_BEST_MODEL_PATH, map_location=DEVICE)
 )
-
 model.eval()
 
 all_predictions = []

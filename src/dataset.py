@@ -5,7 +5,13 @@ import cv2
 import numpy as np
 import torch
 from torch.utils.data import Dataset
-
+from corruption import (
+    add_gaussian_noise,
+    add_motion_blur,
+    reduce_brightness,
+    add_gaussian_blur,
+    add_mixed_corruption
+)
 
 NUM_FRAMES = 16
 FRAME_SIZE = 112
@@ -35,9 +41,15 @@ class ViolenceDataset(Dataset):
     #                 self.samples.append((video_path, label))
    
    #scan split-wise as per the requirement
-    def __init__(self, split, splits_path="results/splits.csv"):
+    def __init__(
+    self,
+    split,
+    splits_path="results/splits.csv",
+    corruption=None
+):
         self.split = split
         self.splits_path = Path(splits_path)
+        self.corruption = corruption
 
         splits_df = pd.read_csv(self.splits_path)
 
@@ -144,6 +156,22 @@ class ViolenceDataset(Dataset):
         video_path, label = self.samples[index]
 
         frames = self._load_frames(video_path)
+
+        if self.corruption == "gaussian":
+            frames = add_gaussian_noise(frames)
+
+        elif self.corruption == "motion":
+            frames = add_motion_blur(frames)
+
+        elif self.corruption == "brightness":
+            frames = reduce_brightness(frames)
+
+        elif self.corruption == "gaussian_blur":
+            frames = add_gaussian_blur(frames)
+
+        elif self.corruption == "mixed":
+            frames = add_mixed_corruption(frames)
+
         frames_tensor = self._preprocess_frames(frames)
 
         return frames_tensor, label

@@ -35,3 +35,5 @@ CHECKPOINT_DIR.mkdir(exist_ok=True)
 
 BEST_MODEL_PATH = CHECKPOINT_DIR / "best_model.pth"
 LAST_MODEL_PATH = CHECKPOINT_DIR / "last_model.pth"
+ROBUST_BEST_MODEL_PATH = CHECKPOINT_DIR / "robust_best_model.pth"
+ROBUST_LAST_MODEL_PATH = CHECKPOINT_DIR / "robust_last_model.pth"

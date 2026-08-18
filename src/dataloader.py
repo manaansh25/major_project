@@ -5,9 +5,15 @@ from dataset import ViolenceDataset
 BATCH_SIZE = 8
 
 
-train_dataset = ViolenceDataset("train")
-val_dataset = ViolenceDataset("val")
-test_dataset = ViolenceDataset("test")
+train_dataset = ViolenceDataset(
+    "train", corruption="mixed"
+)
+val_dataset = ViolenceDataset(
+    "val", corruption=None
+)
+test_dataset = ViolenceDataset(
+    "test", corruption="mixed"
+)
 
 
 train_loader = DataLoader(

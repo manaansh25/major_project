@@ -19,9 +19,9 @@ from dataset import ViolenceDataset
 
 
 
-train_dataset = ViolenceDataset("train")
+train_dataset = ViolenceDataset("train", corruption="mixed")
 val_dataset = ViolenceDataset("val")
-test_dataset = ViolenceDataset("test")
+test_dataset = ViolenceDataset("test", corruption="mixed")
 
 
 print(f"Train samples: {len(train_dataset)}")

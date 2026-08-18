@@ -129,7 +129,7 @@ for epoch in range(EPOCHS):
         epochs_without_improvement = 0
         torch.save(
             model.state_dict(),
-            os.path.join(CHECKPOINT_DIR, "best_model.pth")
+            os.path.join(CHECKPOINT_DIR, "robust_best_model.pth")
         )
         print("Best model saved.")
 
@@ -141,7 +141,7 @@ for epoch in range(EPOCHS):
 
     torch.save(
     model.state_dict(),
-    os.path.join(CHECKPOINT_DIR, "last_model.pth")
+    os.path.join(CHECKPOINT_DIR, "robust_last_model.pth")
     )
 
     scheduler.step(val_loss)
