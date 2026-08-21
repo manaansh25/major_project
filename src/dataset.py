@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import random
 import pandas as pd
 import cv2
 import numpy as np
@@ -45,11 +46,13 @@ class ViolenceDataset(Dataset):
     self,
     split,
     splits_path="results/splits.csv",
-    corruption=None
+    corruption=None,
+    corruption_probability=0.0
 ):
         self.split = split
         self.splits_path = Path(splits_path)
         self.corruption = corruption
+        self.corruption_probability = corruption_probability
 
         splits_df = pd.read_csv(self.splits_path)
 
@@ -157,20 +160,24 @@ class ViolenceDataset(Dataset):
 
         frames = self._load_frames(video_path)
 
-        if self.corruption == "gaussian":
-            frames = add_gaussian_noise(frames)
+        if (
+            self.corruption is not None
+            and random.random() < self.corruption_probability
+        ):
+            if self.corruption == "gaussian":
+                frames = add_gaussian_noise(frames)
 
-        elif self.corruption == "motion":
-            frames = add_motion_blur(frames)
+            elif self.corruption == "motion":
+                frames = add_motion_blur(frames)
 
-        elif self.corruption == "brightness":
-            frames = reduce_brightness(frames)
+            elif self.corruption == "brightness":
+                frames = reduce_brightness(frames)
 
-        elif self.corruption == "gaussian_blur":
-            frames = add_gaussian_blur(frames)
+            elif self.corruption == "gaussian_blur":
+                frames = add_gaussian_blur(frames)
 
-        elif self.corruption == "mixed":
-            frames = add_mixed_corruption(frames)
+            elif self.corruption == "mixed":
+                frames = add_mixed_corruption(frames)
 
         frames_tensor = self._preprocess_frames(frames)
 

@@ -15,6 +15,18 @@ from config import (
 from dataloader import train_loader, val_loader
 from model import get_model
 from utils import calculate_accuracy
+import random
+import numpy as np
+
+SEED = 42
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.cuda.manual_seed_all(SEED)
+
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 model = get_model().to(DEVICE)
 
@@ -129,7 +141,7 @@ for epoch in range(EPOCHS):
         epochs_without_improvement = 0
         torch.save(
             model.state_dict(),
-            os.path.join(CHECKPOINT_DIR, "robust_best_model.pth")
+            os.path.join(CHECKPOINT_DIR, "balanced_best_model.pth")
         )
         print("Best model saved.")
 
@@ -141,7 +153,7 @@ for epoch in range(EPOCHS):
 
     torch.save(
     model.state_dict(),
-    os.path.join(CHECKPOINT_DIR, "robust_last_model.pth")
+    os.path.join(CHECKPOINT_DIR, "balanced_last_model.pth")
     )
 
     scheduler.step(val_loss)

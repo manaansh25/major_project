@@ -9,8 +9,20 @@ from sklearn.metrics import (
 
 from model import get_model
 from dataloader import test_loader
-from config import DEVICE, BEST_MODEL_PATH, ROBUST_BEST_MODEL_PATH
+from config import DEVICE, BEST_MODEL_PATH, ROBUST_BEST_MODEL_PATH, BALANCED_BEST_MODEL_PATH
+import random
+import numpy as np
+import torch
 
+SEED = 42
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.cuda.manual_seed_all(SEED)
+
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 model = get_model().to(DEVICE)
 
@@ -18,7 +30,7 @@ model = get_model().to(DEVICE)
 #     torch.load(BEST_MODEL_PATH, map_location=DEVICE)
 # )
 model.load_state_dict(
-    torch.load(ROBUST_BEST_MODEL_PATH, map_location=DEVICE)
+    torch.load(BALANCED_BEST_MODEL_PATH, map_location=DEVICE)
 )
 model.eval()
 
