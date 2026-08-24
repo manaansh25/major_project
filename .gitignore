@@ -10,6 +10,10 @@ datasets/
 *.pt
 *.pth
 
+src/project_details.py
+src/collect_corruption_details.py
+results/project_details.txt
+
 .vscode/
 .idea/
 
