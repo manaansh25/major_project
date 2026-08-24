@@ -1,0 +1,19 @@
+Model,Condition,Accuracy,Precision,Recall,F1
+Baseline R3D-18,Clean,98.00,98.65,97.33,97.99
+Baseline R3D-18,Gaussian Noise,96.33,96.03,96.67,96.35
+Baseline R3D-18,Motion Blur,96.67,97.30,96.00,96.64
+Baseline R3D-18,Brightness Reduction,97.00,98.62,95.33,96.95
+Baseline R3D-18,Gaussian Blur,96.67,96.05,97.33,96.69
+Baseline R3D-18,Mixed,92.33,92.62,92.00,92.31
+100% Mixed R3D-18,Clean,90.00,88.46,92.00,90.20
+100% Mixed R3D-18,Gaussian Noise,88.67,83.72,96.00,89.44
+100% Mixed R3D-18,Motion Blur,92.33,93.79,90.67,92.20
+100% Mixed R3D-18,Brightness Reduction,92.33,92.05,92.67,92.36
+100% Mixed R3D-18,Gaussian Blur,90.67,89.10,92.67,90.85
+100% Mixed R3D-18,Mixed,96.67,95.45,98.00,96.71
+50/50 Proposed R3D-18,Clean,98.33,96.77,100.00,98.36
+50/50 Proposed R3D-18,Gaussian Noise,96.33,93.17,100.00,96.46
+50/50 Proposed R3D-18,Motion Blur,98.33,98.01,98.67,98.34
+50/50 Proposed R3D-18,Brightness Reduction,97.00,97.96,96.00,96.97
+50/50 Proposed R3D-18,Gaussian Blur,97.67,96.13,99.33,97.70
+50/50 Proposed R3D-18,Mixed,99.00,98.68,99.33,99.00

@@ -1,0 +1,8 @@
+Model: R3D-18
+GPU: RTX 3050
+Input: 8 x 3 x 16 x 112 x 112
+Total samples: 400
+Total inference time: 6.2956 sec
+Latency per batch: 125.91 ms
+Latency per sample: 15.74 ms
+Throughput: 63.54 clips/sec
