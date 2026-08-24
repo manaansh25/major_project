@@ -17,6 +17,7 @@ from model import get_model
 from utils import calculate_accuracy
 import random
 import numpy as np
+import pandas as pd
 
 SEED = 42
 
@@ -77,6 +78,11 @@ def validate(model, dataloader, criterion, device):
 
     return avg_loss, avg_accuracy
 
+train_losses = []
+train_accuracies = []
+val_losses = []
+val_accuracies = []
+
 #training loop
 for epoch in range(EPOCHS):
 
@@ -134,6 +140,11 @@ for epoch in range(EPOCHS):
     print(
         f"Val Acc    : {val_accuracy:.4f}"
     )
+    train_losses.append(epoch_loss)
+    train_accuracies.append(epoch_accuracy)
+
+    val_losses.append(val_loss)
+    val_accuracies.append(val_accuracy)
 
 
     if val_accuracy > best_val_accuracy:
@@ -164,3 +175,19 @@ for epoch in range(EPOCHS):
     if epochs_without_improvement >= patience:
         print("\nEarly stopping triggered.")
         break
+
+
+history_df = pd.DataFrame({
+    "epoch": range(1, len(train_losses) + 1),
+    "train_loss": train_losses,
+    "train_accuracy": train_accuracies,
+    "val_loss": val_losses,
+    "val_accuracy": val_accuracies
+})
+
+history_df.to_csv(
+    "results/training_history.csv",
+    index=False
+)
+
+print("\nTraining history saved to results/training_history.csv")

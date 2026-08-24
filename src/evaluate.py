@@ -6,9 +6,9 @@ from sklearn.metrics import (
     f1_score,
     confusion_matrix
 )
-
+from dataset import ViolenceDataset
+from torch.utils.data import DataLoader
 from model import get_model
-from dataloader import test_loader
 from config import DEVICE, BEST_MODEL_PATH, ROBUST_BEST_MODEL_PATH, BALANCED_BEST_MODEL_PATH
 import random
 import numpy as np
@@ -26,6 +26,20 @@ torch.backends.cudnn.benchmark = False
 
 model = get_model().to(DEVICE)
 
+
+test_dataset = ViolenceDataset(
+    "test",
+    corruption="mixed",
+    corruption_probability=1.0
+)
+
+test_loader = DataLoader(
+    test_dataset,
+    batch_size=8,
+    shuffle=False,
+    num_workers=0,
+    pin_memory=True
+)
 # model.load_state_dict(
 #     torch.load(BEST_MODEL_PATH, map_location=DEVICE)
 # )

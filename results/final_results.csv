@@ -11,9 +11,9 @@ Baseline R3D-18,Mixed,92.33,92.62,92.00,92.31
 100% Mixed R3D-18,Brightness Reduction,92.33,92.05,92.67,92.36
 100% Mixed R3D-18,Gaussian Blur,90.67,89.10,92.67,90.85
 100% Mixed R3D-18,Mixed,96.67,95.45,98.00,96.71
-50/50 Proposed R3D-18,Clean,98.33,96.77,100.00,98.36
+50/50 Proposed R3D-18,Clean,96.33,93.71,99.33,96.44
 50/50 Proposed R3D-18,Gaussian Noise,96.33,93.17,100.00,96.46
-50/50 Proposed R3D-18,Motion Blur,98.33,98.01,98.67,98.34
-50/50 Proposed R3D-18,Brightness Reduction,97.00,97.96,96.00,96.97
-50/50 Proposed R3D-18,Gaussian Blur,97.67,96.13,99.33,97.70
-50/50 Proposed R3D-18,Mixed,99.00,98.68,99.33,99.00
+50/50 Proposed R3D-18,Motion Blur,95.00,91.41,99.33,95.21
+50/50 Proposed R3D-18,Brightness Reduction,97.00,96.69,97.33,97.01
+50/50 Proposed R3D-18,Gaussian Blur,96.67,94.30,99.33,96.75
+50/50 Proposed R3D-18,Mixed,96.33,96.03,96.67,96.35
