@@ -4,6 +4,7 @@ import torch.nn as nn
 from torch.optim import AdamW
 from tqdm import tqdm
 from torch.optim.lr_scheduler import ReduceLROnPlateau
+import argparse
 
 from config import (
     DEVICE,
@@ -21,6 +22,13 @@ import pandas as pd
 
 SEED = 42
 
+MODEL_NAME = "s3d" #change here to change the model architecture, options are: r2plus1d18, mc3_18, r3d_18, s3d
+# parser = argparse.ArgumentParser()
+# parser.add_argument("--model", default="r3d18")
+# args = parser.parse_args()
+
+# MODEL_NAME = args.model
+
 random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
@@ -29,7 +37,7 @@ torch.cuda.manual_seed_all(SEED)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-model = get_model().to(DEVICE)
+model = get_model(MODEL_NAME).to(DEVICE)
 
 criterion = nn.CrossEntropyLoss()
 
@@ -152,7 +160,8 @@ for epoch in range(EPOCHS):
         epochs_without_improvement = 0
         torch.save(
             model.state_dict(),
-            os.path.join(CHECKPOINT_DIR, "balanced_best_model.pth")
+            os.path.join(CHECKPOINT_DIR,
+            f"{MODEL_NAME}_best_model.pth")
         )
         print("Best model saved.")
 
@@ -164,7 +173,9 @@ for epoch in range(EPOCHS):
 
     torch.save(
     model.state_dict(),
-    os.path.join(CHECKPOINT_DIR, "balanced_last_model.pth")
+    os.path.join(
+    CHECKPOINT_DIR,
+    f"{MODEL_NAME}_last_model.pth")
     )
 
     scheduler.step(val_loss)
@@ -186,8 +197,10 @@ history_df = pd.DataFrame({
 })
 
 history_df.to_csv(
-    "results/training_history.csv",
+    f"results/{MODEL_NAME}_training_history.csv",
     index=False
 )
 
-print("\nTraining history saved to results/training_history.csv")
+print(
+    f"\nTraining history saved to results/{MODEL_NAME}_training_history.csv"
+)
